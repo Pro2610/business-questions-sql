@@ -1,0 +1,39 @@
+WITH base AS (
+  SELECT
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    location,
+    software_name,
+    `User Type` AS user_type,
+    SUM(revenue_amount) AS revenue,
+    COUNT(DISTINCT user_id) AS paid_users
+  FROM `project.dataset.payments`
+  WHERE DATE(payment_date) BETWEEN '2025-02-01' AND '2025-03-31'
+  GROUP BY 1,2,3,4
+),
+p AS (
+  SELECT
+    location,
+    software_name,
+    user_type,
+    SUM(IF(month='2025-02', revenue, 0)) AS rev_feb,
+    SUM(IF(month='2025-03', revenue, 0)) AS rev_mar,
+    SUM(IF(month='2025-02', paid_users, 0)) AS pu_feb,
+    SUM(IF(month='2025-03', paid_users, 0)) AS pu_mar
+  FROM base
+  GROUP BY 1,2,3
+)
+SELECT
+  location,
+  software_name,
+  user_type,
+  rev_feb,
+  rev_mar,
+  pu_feb,
+  pu_mar,
+  SAFE_DIVIDE(rev_feb, NULLIF(pu_feb, 0)) AS arppu_feb,
+  SAFE_DIVIDE(rev_mar, NULLIF(pu_mar, 0)) AS arppu_mar,
+  (rev_mar - rev_feb) AS revenue_delta,
+  (pu_mar - pu_feb) AS paid_users_delta
+FROM p
+ORDER BY revenue_delta ASC
+LIMIT 20;
