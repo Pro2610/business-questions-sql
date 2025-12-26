@@ -1,0 +1,11 @@
+SELECT
+  FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+  SUM(revenue_amount) AS revenue,
+  COUNT(DISTINCT user_id) AS paid_users,
+  COUNT(*) AS transactions,
+  SAFE_DIVIDE(SUM(revenue_amount), COUNT(DISTINCT user_id)) AS arppu,
+  SAFE_DIVIDE(SUM(revenue_amount), COUNT(*)) AS aov
+FROM `project.dataset.payments`
+WHERE DATE(payment_date) BETWEEN '2025-02-01' AND '2025-03-31'
+GROUP BY 1
+ORDER BY 1;
