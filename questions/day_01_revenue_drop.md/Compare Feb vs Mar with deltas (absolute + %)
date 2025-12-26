@@ -1,0 +1,27 @@
+WITH monthly AS (
+  SELECT
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    SUM(revenue_amount) AS revenue,
+    COUNT(DISTINCT user_id) AS paid_users,
+    COUNT(*) AS transactions,
+    SAFE_DIVIDE(SUM(revenue_amount), COUNT(DISTINCT user_id)) AS arppu,
+    SAFE_DIVIDE(SUM(revenue_amount), COUNT(*)) AS aov
+  FROM `project.dataset.payments`
+  WHERE DATE(payment_date) BETWEEN '2025-02-01' AND '2025-03-31'
+  GROUP BY 1
+)
+SELECT
+  month,
+  revenue,
+  paid_users,
+  transactions,
+  arppu,
+  aov,
+  revenue - LAG(revenue) OVER (ORDER BY month) AS revenue_delta,
+  SAFE_DIVIDE(revenue - LAG(revenue) OVER (ORDER BY month), LAG(revenue) OVER (ORDER BY month)) AS revenue_delta_pct,
+  paid_users - LAG(paid_users) OVER (ORDER BY month) AS paid_users_delta,
+  SAFE_DIVIDE(paid_users - LAG(paid_users) OVER (ORDER BY month), LAG(paid_users) OVER (ORDER BY month)) AS paid_users_delta_pct,
+  arppu - LAG(arppu) OVER (ORDER BY month) AS arppu_delta,
+  SAFE_DIVIDE(arppu - LAG(arppu) OVER (ORDER BY month), LAG(arppu) OVER (ORDER BY month)) AS arppu_delta_pct
+FROM monthly
+ORDER BY month;
