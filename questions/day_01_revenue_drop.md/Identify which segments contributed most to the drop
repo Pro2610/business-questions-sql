@@ -1,0 +1,32 @@
+WITH seg AS (
+  SELECT
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    location,
+    software_name,
+    `User Type` AS user_type,
+    SUM(revenue_amount) AS revenue
+  FROM `project.dataset.payments`
+  WHERE DATE(payment_date) BETWEEN '2025-02-01' AND '2025-03-31'
+  GROUP BY 1,2,3,4
+),
+pivoted AS (
+  SELECT
+    location,
+    software_name,
+    user_type,
+    SUM(IF(month = '2025-02', revenue, 0)) AS revenue_feb,
+    SUM(IF(month = '2025-03', revenue, 0)) AS revenue_mar
+  FROM seg
+  GROUP BY 1,2,3
+)
+SELECT
+  location,
+  software_name,
+  user_type,
+  revenue_feb,
+  revenue_mar,
+  (revenue_mar - revenue_feb) AS revenue_delta
+FROM pivoted
+WHERE revenue_feb > 0 OR revenue_mar > 0
+ORDER BY revenue_delta ASC
+LIMIT 20;
