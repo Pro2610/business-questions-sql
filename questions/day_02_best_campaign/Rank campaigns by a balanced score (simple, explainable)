@@ -1,0 +1,34 @@
+WITH base AS (
+  SELECT
+    campaign_id,
+    campaign_name,
+    SUM(revenue_amount) AS revenue,
+    COUNT(DISTINCT user_id) AS paid_users,
+    COUNT(*) AS transactions,
+    SAFE_DIVIDE(SUM(revenue_amount), COUNT(DISTINCT user_id)) AS arppu
+  FROM `project.dataset.payments`
+  WHERE DATE(payment_date) BETWEEN '2025-01-01' AND '2025-03-31'
+  GROUP BY 1,2
+  HAVING paid_users >= 50
+),
+scaled AS (
+  SELECT
+    *,
+    -- Min-max scaling to keep metrics comparable
+    SAFE_DIVIDE(revenue - MIN(revenue) OVER(), NULLIF(MAX(revenue) OVER() - MIN(revenue) OVER(), 0)) AS revenue_s,
+    SAFE_DIVIDE(arppu - MIN(arppu) OVER(), NULLIF(MAX(arppu) OVER() - MIN(arppu) OVER(), 0)) AS arppu_s,
+    SAFE_DIVIDE(paid_users - MIN(paid_users) OVER(), NULLIF(MAX(paid_users) OVER() - MIN(paid_users) OVER(), 0)) AS paid_users_s
+  FROM base
+)
+SELECT
+  campaign_id,
+  campaign_name,
+  revenue,
+  paid_users,
+  transactions,
+  arppu,
+  -- Balanced score: prioritize revenue, but keep quality + scale
+  (0.5 * revenue_s + 0.3 * arppu_s + 0.2 * paid_users_s) AS score
+FROM scaled
+ORDER BY score DESC
+LIMIT 20;
