@@ -1,0 +1,31 @@
+By location
+SELECT
+  location,
+  COUNT(DISTINCT user_id) AS users,
+  SAFE_DIVIDE(SUM(retained_d30), COUNT(DISTINCT user_id)) AS retention_d30
+FROM retention_check
+GROUP BY 1
+HAVING users >= 50
+ORDER BY retention_d30 ASC;
+
+By software
+
+SELECT
+  software_name,
+  COUNT(DISTINCT user_id) AS users,
+  SAFE_DIVIDE(SUM(retained_d30), COUNT(DISTINCT user_id)) AS retention_d30
+FROM retention_check
+GROUP BY 1
+HAVING users >= 50
+ORDER BY retention_d30 ASC;
+
+
+Insight (fill after running queries)
+
+The lowest D30 retention is observed for: [segment]
+
+This segment shows early churn shortly after the first payment.
+
+Possible causes: weak onboarding, poor product fit, or low perceived value.
+
+Recommendation: investigate user journey and early usage behavior for this segment.
