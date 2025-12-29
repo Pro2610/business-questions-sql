@@ -1,0 +1,47 @@
+WITH first_payment AS (
+  SELECT
+    user_id,
+    MIN(DATE(payment_date)) AS first_payment_date,
+    location,
+    software_name,
+    `User Type` AS user_type
+  FROM `project.dataset.payments`
+  GROUP BY 1,2,3,4
+)
+
+Check if the user returned within 30 days
+
+, retention_check AS (
+  SELECT
+    fp.user_id,
+    fp.location,
+    fp.software_name,
+    fp.user_type,
+    fp.first_payment_date,
+    MAX(
+      CASE
+        WHEN DATE_DIFF(DATE(p.payment_date), fp.first_payment_date, DAY)
+             BETWEEN 1 AND 30
+        THEN 1
+        ELSE 0
+      END
+    ) AS retained_d30
+  FROM first_payment fp
+  LEFT JOIN `project.dataset.payments` p
+    ON fp.user_id = p.user_id
+  GROUP BY 1,2,3,4,5
+)
+
+Retention rate by segment
+
+SELECT
+  location,
+  software_name,
+  user_type,
+  COUNT(DISTINCT user_id) AS users,
+  SUM(retained_d30) AS retained_users,
+  SAFE_DIVIDE(SUM(retained_d30), COUNT(DISTINCT user_id)) AS retention_d30
+FROM retention_check
+GROUP BY 1,2,3
+HAVING users >= 50
+ORDER BY retention_d30 ASC;
