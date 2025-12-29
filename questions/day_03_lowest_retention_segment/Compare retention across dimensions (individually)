@@ -21,11 +21,7 @@ ORDER BY retention_d30 ASC;
 
 
 Insight (fill after running queries)
-
-The lowest D30 retention is observed for: [segment]
-
-This segment shows early churn shortly after the first payment.
-
-Possible causes: weak onboarding, poor product fit, or low perceived value.
-
-Recommendation: investigate user journey and early usage behavior for this segment.
+ - The lowest D30 retention is observed for: [segment]
+ - This segment shows early churn shortly after the first payment.
+ - Possible causes: weak onboarding, poor product fit, or low perceived value.
+ - Recommendation: investigate user journey and early usage behavior for this segment.
