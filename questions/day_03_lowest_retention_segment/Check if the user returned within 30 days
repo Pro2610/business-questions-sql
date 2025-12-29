@@ -9,7 +9,7 @@ WITH first_payment AS (
   GROUP BY 1,2,3,4
 )
 
-Check if the user returned within 30 days
+# Check if the user returned within 30 days
 
 , retention_check AS (
   SELECT
@@ -32,7 +32,7 @@ Check if the user returned within 30 days
   GROUP BY 1,2,3,4,5
 )
 
-Retention rate by segment
+# Retention rate by segment
 
 SELECT
   location,
