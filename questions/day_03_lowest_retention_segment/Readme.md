@@ -12,6 +12,7 @@ The business wants to identify weak segments in order to:
 
 In this analysis, retention is measured as **D30 retention**.
 
+
 ## 📐 Retention Definition
 A user is considered **retained on D30** if they made at least one payment
 within 30 days after their first payment.
