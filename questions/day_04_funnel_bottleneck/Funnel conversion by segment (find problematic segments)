@@ -1,0 +1,11 @@
+SELECT
+  location,
+  software_name,
+  user_type,
+  COUNT(DISTINCT user_id) AS registered_users,
+  SAFE_DIVIDE(SUM(first_payment), COUNT(DISTINCT user_id)) AS reg_to_pay_cr,
+  SAFE_DIVIDE(SUM(repeat_payment), SUM(first_payment)) AS pay_to_repeat_cr
+FROM funnel
+GROUP BY 1,2,3
+HAVING registered_users >= 50
+ORDER BY reg_to_pay_cr ASC;
