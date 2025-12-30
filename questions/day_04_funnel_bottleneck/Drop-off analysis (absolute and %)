@@ -1,0 +1,19 @@
+SELECT
+  'Registered → First Payment' AS step,
+  COUNT(DISTINCT user_id) - SUM(first_payment) AS dropped_users,
+  SAFE_DIVIDE(
+    COUNT(DISTINCT user_id) - SUM(first_payment),
+    COUNT(DISTINCT user_id)
+  ) AS drop_rate
+FROM funnel
+
+UNION ALL
+
+SELECT
+  'First → Repeat Payment' AS step,
+  SUM(first_payment) - SUM(repeat_payment) AS dropped_users,
+  SAFE_DIVIDE(
+    SUM(first_payment) - SUM(repeat_payment),
+    SUM(first_payment)
+  ) AS drop_rate
+FROM funnel;
