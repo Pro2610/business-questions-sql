@@ -21,8 +21,6 @@ questions/
 ├── day_04_funnel_bottleneck.md
 ├── day_05_new_vs_returning_users.md
 
-yaml
-Копировать код
 
 Each file represents **one complete business problem**.
 
