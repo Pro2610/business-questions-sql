@@ -1,0 +1,10 @@
+SELECT
+  month,
+  user_type_flag,
+  SUM(revenue_amount) AS revenue,
+  COUNT(DISTINCT user_id) AS paid_users,
+  COUNT(*) AS transactions,
+  SAFE_DIVIDE(SUM(revenue_amount), COUNT(DISTINCT user_id)) AS arppu
+FROM classified_payments
+GROUP BY 1,2
+ORDER BY month, user_type_flag;
