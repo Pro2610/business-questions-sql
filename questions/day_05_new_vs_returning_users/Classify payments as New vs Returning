@@ -1,0 +1,26 @@
+### 1) Identify first payment date per user
+```sql
+WITH first_payment AS (
+  SELECT
+    user_id,
+    MIN(DATE(payment_date)) AS first_payment_date
+  FROM `project.dataset.payments`
+  GROUP BY 1
+)
+, classified_payments AS (
+  SELECT
+    p.user_id,
+    DATE(p.payment_date) AS payment_date,
+    FORMAT_DATE('%Y-%m', DATE(p.payment_date)) AS month,
+    p.revenue_amount,
+    fp.first_payment_date,
+    CASE
+      WHEN DATE(p.payment_date) = fp.first_payment_date
+           OR FORMAT_DATE('%Y-%m', fp.first_payment_date) = FORMAT_DATE('%Y-%m', DATE(p.payment_date))
+      THEN 'New'
+      ELSE 'Returning'
+    END AS user_type_flag
+  FROM `project.dataset.payments` p
+  JOIN first_payment fp
+    ON p.user_id = fp.user_id
+)
