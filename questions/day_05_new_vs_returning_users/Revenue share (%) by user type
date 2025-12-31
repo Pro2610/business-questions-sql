@@ -1,0 +1,18 @@
+WITH monthly AS (
+  SELECT
+    month,
+    user_type_flag,
+    SUM(revenue_amount) AS revenue
+  FROM classified_payments
+  GROUP BY 1,2
+)
+SELECT
+  month,
+  user_type_flag,
+  revenue,
+  SAFE_DIVIDE(
+    revenue,
+    SUM(revenue) OVER (PARTITION BY month)
+  ) AS revenue_share
+FROM monthly
+ORDER BY month, user_type_flag;
