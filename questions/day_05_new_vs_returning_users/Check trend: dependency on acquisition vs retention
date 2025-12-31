@@ -1,0 +1,7 @@
+SELECT
+  month,
+  SUM(CASE WHEN user_type_flag = 'New' THEN revenue_amount ELSE 0 END) AS new_user_revenue,
+  SUM(CASE WHEN user_type_flag = 'Returning' THEN revenue_amount ELSE 0 END) AS returning_user_revenue
+FROM classified_payments
+GROUP BY 1
+ORDER BY month;
