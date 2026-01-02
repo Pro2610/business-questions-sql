@@ -1,0 +1,25 @@
+## 🛠 SQL (BigQuery)
+
+### 1) Revenue per user
+```sql
+WITH user_revenue AS (
+  SELECT
+    user_id,
+    SUM(revenue_amount) AS total_revenue
+  FROM `project.dataset.payments`
+  GROUP BY 1
+)
+
+, ranked_users AS (
+  SELECT
+    user_id,
+    total_revenue,
+    SUM(total_revenue) OVER () AS total_revenue_all,
+    SUM(total_revenue) OVER (
+      ORDER BY total_revenue DESC
+      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS cumulative_revenue,
+    ROW_NUMBER() OVER (ORDER BY total_revenue DESC) AS user_rank,
+    COUNT(*) OVER () AS total_users
+  FROM user_revenue
+)
