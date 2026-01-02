@@ -1,0 +1,19 @@
+SELECT
+  'Top 10%' AS segment,
+  SAFE_DIVIDE(
+    SUM(total_revenue),
+    SUM(total_revenue) OVER ()
+  ) AS revenue_share
+FROM ranked_users
+WHERE user_rank <= total_users * 0.10
+
+UNION ALL
+
+SELECT
+  'Top 20%' AS segment,
+  SAFE_DIVIDE(
+    SUM(total_revenue),
+    SUM(total_revenue) OVER ()
+  ) AS revenue_share
+FROM ranked_users
+WHERE user_rank <= total_users * 0.20;
