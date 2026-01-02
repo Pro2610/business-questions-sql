@@ -1,0 +1,6 @@
+SELECT
+  user_id,
+  total_revenue
+FROM ranked_users
+WHERE user_rank <= total_users * 0.10
+ORDER BY total_revenue DESC;
