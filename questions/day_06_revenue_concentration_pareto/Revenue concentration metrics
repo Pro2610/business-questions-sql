@@ -1,0 +1,7 @@
+SELECT
+  user_rank,
+  total_users,
+  SAFE_DIVIDE(user_rank, total_users) AS user_share,
+  SAFE_DIVIDE(cumulative_revenue, total_revenue_all) AS revenue_share
+FROM ranked_users
+ORDER BY user_rank;
