@@ -1,0 +1,25 @@
+WITH monthly_totals AS (
+  SELECT
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    SUM(revenue_amount) AS total_revenue
+  FROM `project.dataset.payments`
+  GROUP BY 1
+),
+churned AS (
+  SELECT
+    month,
+    SUM(prev_month_revenue) AS churned_revenue
+  FROM churn_flags
+  WHERE prev_month_revenue IS NOT NULL
+    AND monthly_revenue = 0
+  GROUP BY 1
+)
+SELECT
+  c.month,
+  churned_revenue,
+  t.total_revenue,
+  SAFE_DIVIDE(churned_revenue, t.total_revenue) AS churned_revenue_rate
+FROM churned c
+JOIN monthly_totals t
+  ON c.month = t.month
+ORDER BY c.month;
