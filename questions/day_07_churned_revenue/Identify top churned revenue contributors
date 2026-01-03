@@ -1,0 +1,8 @@
+SELECT
+  user_id,
+  prev_month_revenue AS lost_revenue
+FROM churn_flags
+WHERE prev_month_revenue IS NOT NULL
+  AND monthly_revenue = 0
+ORDER BY lost_revenue DESC
+LIMIT 20;
