@@ -1,0 +1,9 @@
+SELECT
+  month,
+  SUM(prev_month_revenue) AS churned_revenue,
+  COUNT(DISTINCT user_id) AS churned_users
+FROM churn_flags
+WHERE prev_month_revenue IS NOT NULL
+  AND monthly_revenue = 0
+GROUP BY 1
+ORDER BY month;
