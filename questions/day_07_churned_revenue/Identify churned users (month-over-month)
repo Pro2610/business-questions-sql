@@ -1,0 +1,24 @@
+## 🛠 SQL (BigQuery)
+
+### 1) Monthly revenue per user
+```sql
+WITH monthly_user_revenue AS (
+  SELECT
+    user_id,
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    SUM(revenue_amount) AS monthly_revenue
+  FROM `project.dataset.payments`
+  GROUP BY 1,2
+)
+
+, churn_flags AS (
+  SELECT
+    user_id,
+    month,
+    monthly_revenue,
+    LAG(monthly_revenue) OVER (
+      PARTITION BY user_id
+      ORDER BY month
+    ) AS prev_month_revenue
+  FROM monthly_user_revenue
+)
