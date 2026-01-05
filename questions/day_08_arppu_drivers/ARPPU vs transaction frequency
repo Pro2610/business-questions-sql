@@ -1,0 +1,15 @@
+WITH user_stats AS (
+  SELECT
+    user_id,
+    COUNT(*) AS transactions,
+    SUM(revenue_amount) AS revenue
+  FROM `project.dataset.payments`
+  GROUP BY 1
+)
+SELECT
+  transactions,
+  SAFE_DIVIDE(SUM(revenue), COUNT(DISTINCT user_id)) AS arppu,
+  COUNT(DISTINCT user_id) AS users
+FROM user_stats
+GROUP BY 1
+ORDER BY transactions;
