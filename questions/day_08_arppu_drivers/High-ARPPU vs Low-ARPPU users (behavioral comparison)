@@ -26,3 +26,4 @@ CROSS JOIN thresholds t
 WHERE ua.arppu >= t.high_threshold
    OR ua.arppu <= t.low_threshold
 GROUP BY 1;
+
