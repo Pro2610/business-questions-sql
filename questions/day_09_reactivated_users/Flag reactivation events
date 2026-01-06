@@ -1,0 +1,8 @@
+, reactivations AS (
+  SELECT
+    user_id,
+    payment_date AS reactivation_date,
+    revenue_amount AS reactivation_revenue
+  FROM gaps
+  WHERE gap_days >= 30
+)
