@@ -1,0 +1,8 @@
+SELECT
+  user_id,
+  COUNT(*) AS reactivation_count,
+  SUM(reactivation_revenue) AS total_reactivated_revenue
+FROM reactivations
+GROUP BY 1
+HAVING reactivation_count > 1
+ORDER BY total_reactivated_revenue DESC;
