@@ -1,0 +1,7 @@
+SELECT
+  FORMAT_DATE('%Y-%m', reactivation_date) AS month,
+  COUNT(DISTINCT user_id) AS reactivated_users,
+  SUM(reactivation_revenue) AS reactivated_revenue
+FROM reactivations
+GROUP BY 1
+ORDER BY month;
