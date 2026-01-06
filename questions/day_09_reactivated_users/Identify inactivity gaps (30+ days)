@@ -1,0 +1,22 @@
+### 1) Order payments and calculate gaps between transactions
+```sql
+WITH ordered_payments AS (
+  SELECT
+    user_id,
+    DATE(payment_date) AS payment_date,
+    revenue_amount,
+    LAG(DATE(payment_date)) OVER (
+      PARTITION BY user_id
+      ORDER BY DATE(payment_date)
+    ) AS prev_payment_date
+  FROM `project.dataset.payments`
+)
+, gaps AS (
+  SELECT
+    user_id,
+    payment_date,
+    revenue_amount,
+    DATE_DIFF(payment_date, prev_payment_date, DAY) AS gap_days
+  FROM ordered_payments
+  WHERE prev_payment_date IS NOT NULL
+)
