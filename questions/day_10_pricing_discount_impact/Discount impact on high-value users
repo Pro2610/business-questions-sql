@@ -1,0 +1,22 @@
+WITH user_revenue AS (
+  SELECT
+    user_id,
+    SUM(revenue_amount) AS total_revenue
+  FROM classified_payments
+  GROUP BY 1
+),
+threshold AS (
+  SELECT
+    APPROX_QUANTILES(total_revenue, 10)[OFFSET(8)] AS high_value_threshold
+  FROM user_revenue
+)
+SELECT
+  cp.price_type,
+  COUNT(DISTINCT cp.user_id) AS high_value_users,
+  SUM(cp.revenue_amount) AS revenue
+FROM classified_payments cp
+JOIN user_revenue ur
+  ON cp.user_id = ur.user_id
+CROSS JOIN threshold t
+WHERE ur.total_revenue >= t.high_value_threshold
+GROUP BY 1;
