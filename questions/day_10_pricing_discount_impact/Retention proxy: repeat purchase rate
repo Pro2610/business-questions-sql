@@ -1,0 +1,17 @@
+WITH user_purchases AS (
+  SELECT
+    user_id,
+    price_type,
+    COUNT(*) AS transactions
+  FROM classified_payments
+  GROUP BY 1,2
+)
+SELECT
+  price_type,
+  COUNT(DISTINCT user_id) AS users,
+  SAFE_DIVIDE(
+    COUNTIF(transactions > 1),
+    COUNT(DISTINCT user_id)
+  ) AS repeat_purchase_rate
+FROM user_purchases
+GROUP BY 1;
