@@ -1,0 +1,11 @@
+SELECT
+  month,
+  price_type,
+  SUM(revenue_amount) AS revenue,
+  SAFE_DIVIDE(
+    SUM(revenue_amount),
+    SUM(SUM(revenue_amount)) OVER (PARTITION BY month)
+  ) AS revenue_share
+FROM classified_payments
+GROUP BY 1,2
+ORDER BY month, price_type;
