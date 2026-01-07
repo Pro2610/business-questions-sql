@@ -1,0 +1,21 @@
+WITH classified_payments AS (
+  SELECT
+    user_id,
+    DATE(payment_date) AS payment_date,
+    FORMAT_DATE('%Y-%m', DATE(payment_date)) AS month,
+    revenue_amount,
+    discount_amount,
+    CASE
+      WHEN discount_amount > 0 THEN 'Discounted'
+      ELSE 'Full Price'
+    END AS price_type
+  FROM `project.dataset.payments`
+)
+SELECT
+  price_type,
+  SUM(revenue_amount) AS revenue,
+  COUNT(DISTINCT user_id) AS paid_users,
+  COUNT(*) AS transactions,
+  SAFE_DIVIDE(SUM(revenue_amount), COUNT(DISTINCT user_id)) AS arppu
+FROM classified_payments
+GROUP BY 1;
