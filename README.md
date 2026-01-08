@@ -12,6 +12,7 @@ The goal is to demonstrate **analytical thinking**, not just technical SQL skill
 
 ---
 
+
 ## 📂 Project Structure
 
 questions/
