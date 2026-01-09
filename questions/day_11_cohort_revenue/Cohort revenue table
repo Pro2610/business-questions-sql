@@ -1,0 +1,6 @@
+SELECT
+  cohort_month,
+  cohort_age,
+  revenue
+FROM cohort_revenue
+ORDER BY cohort_month, cohort_age;
