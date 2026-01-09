@@ -1,0 +1,9 @@
+, cohort_revenue AS (
+  SELECT
+    cohort_month,
+    payment_month,
+    DATE_DIFF(payment_month, cohort_month, MONTH) AS cohort_age,
+    SUM(revenue_amount) AS revenue
+  FROM payments_with_cohort
+  GROUP BY 1,2,3
+)
