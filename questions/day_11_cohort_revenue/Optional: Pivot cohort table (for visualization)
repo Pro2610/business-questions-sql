@@ -1,0 +1,9 @@
+SELECT
+  cohort_month,
+  SUM(IF(cohort_age = 0, revenue, 0)) AS m0,
+  SUM(IF(cohort_age = 1, revenue, 0)) AS m1,
+  SUM(IF(cohort_age = 2, revenue, 0)) AS m2,
+  SUM(IF(cohort_age = 3, revenue, 0)) AS m3
+FROM cohort_revenue
+GROUP BY 1
+ORDER BY cohort_month;
