@@ -1,0 +1,17 @@
+SELECT
+  cohort_month,
+  MAX(IF(cohort_age = 0, ltv, NULL)) AS ltv_m0,
+  MAX(IF(cohort_age = 1, ltv, NULL)) AS ltv_m1,
+  MAX(IF(cohort_age = 2, ltv, NULL)) AS ltv_m2,
+  MAX(IF(cohort_age = 3, ltv, NULL)) AS ltv_m3
+FROM (
+  SELECT
+    cr.cohort_month,
+    cr.cohort_age,
+    SAFE_DIVIDE(cr.cumulative_revenue, cs.users) AS ltv
+  FROM cumulative_revenue cr
+  JOIN cohort_size cs
+    ON cr.cohort_month = cs.cohort_month
+)
+GROUP BY 1
+ORDER BY cohort_month;
