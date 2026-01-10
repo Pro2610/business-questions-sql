@@ -1,0 +1,11 @@
+, cumulative_revenue AS (
+  SELECT
+    cohort_month,
+    cohort_age,
+    SUM(revenue) OVER (
+      PARTITION BY cohort_month
+      ORDER BY cohort_age
+      ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS cumulative_revenue
+  FROM cohort_revenue
+)
