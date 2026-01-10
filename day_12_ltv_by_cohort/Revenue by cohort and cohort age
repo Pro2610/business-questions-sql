@@ -1,0 +1,18 @@
+, payments_with_cohort AS (
+  SELECT
+    p.user_id,
+    DATE_TRUNC(DATE(p.payment_date), MONTH) AS payment_month,
+    fp.cohort_month,
+    p.revenue_amount
+  FROM `project.dataset.payments` p
+  JOIN first_payment fp
+    ON p.user_id = fp.user_id
+),
+cohort_revenue AS (
+  SELECT
+    cohort_month,
+    DATE_DIFF(payment_month, cohort_month, MONTH) AS cohort_age,
+    SUM(revenue_amount) AS revenue
+  FROM payments_with_cohort
+  GROUP BY 1,2
+)
