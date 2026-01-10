@@ -1,0 +1,14 @@
+WITH first_payment AS (
+  SELECT
+    user_id,
+    DATE_TRUNC(MIN(DATE(payment_date)), MONTH) AS cohort_month
+  FROM `project.dataset.payments`
+  GROUP BY 1
+),
+cohort_size AS (
+  SELECT
+    cohort_month,
+    COUNT(DISTINCT user_id) AS users
+  FROM first_payment
+  GROUP BY 1
+)
