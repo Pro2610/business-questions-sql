@@ -1,0 +1,8 @@
+SELECT
+  cr.cohort_month,
+  cr.cohort_age,
+  SAFE_DIVIDE(cr.cumulative_revenue, cs.users) AS ltv
+FROM cumulative_revenue cr
+JOIN cohort_size cs
+  ON cr.cohort_month = cs.cohort_month
+ORDER BY cohort_month, cohort_age;
