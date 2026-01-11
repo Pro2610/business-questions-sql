@@ -13,6 +13,7 @@ This allows the business to:
 - detect retention or pricing issues early,
 - compare cohort performance objectively.
 
+
 ## 📐 Cohort Definition
 - **Cohort month**: the month of a user’s first payment.
 - **Cohort age**: number of months since the first payment.
