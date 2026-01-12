@@ -1,0 +1,7 @@
+, weekly_active AS (
+  SELECT
+    DATE_TRUNC(DATE(payment_date), WEEK(MONDAY)) AS week,
+    COUNT(DISTINCT user_id) AS wau_payers
+  FROM `project.dataset.payments`
+  GROUP BY 1
+)
