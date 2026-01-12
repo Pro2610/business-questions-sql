@@ -1,0 +1,12 @@
+SELECT
+  m.month,
+  AVG(d.dau_payers) AS avg_dau,
+  AVG(w.wau_payers) AS avg_wau,
+  m.mau_payers
+FROM monthly_active m
+LEFT JOIN daily_active d
+  ON DATE_TRUNC(d.day, MONTH) = m.month
+LEFT JOIN weekly_active w
+  ON DATE_TRUNC(w.week, MONTH) = m.month
+GROUP BY 1, m.mau_payers
+ORDER BY m.month;
