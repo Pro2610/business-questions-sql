@@ -1,0 +1,18 @@
+SELECT
+  marketing_channel,
+  first_touch_revenue,
+  last_touch_revenue,
+  CASE
+    WHEN first_touch_revenue > last_touch_revenue THEN 'Acquisition-oriented'
+    WHEN last_touch_revenue > first_touch_revenue THEN 'Conversion-oriented'
+    ELSE 'Balanced'
+  END AS channel_role
+FROM (
+  SELECT
+    COALESCE(ft.marketing_channel, lt.marketing_channel) AS marketing_channel,
+    ft.attributed_revenue AS first_touch_revenue,
+    lt.attributed_revenue AS last_touch_revenue
+  FROM first_touch ft
+  FULL OUTER JOIN last_touch lt
+    ON ft.marketing_channel = lt.marketing_channel
+);
