@@ -1,0 +1,12 @@
+SELECT
+  COALESCE(ft.marketing_channel, lt.marketing_channel) AS marketing_channel,
+  ft.attributed_revenue AS first_touch_revenue,
+  lt.attributed_revenue AS last_touch_revenue,
+  SAFE_DIVIDE(
+    lt.attributed_revenue - ft.attributed_revenue,
+    ft.attributed_revenue
+  ) AS revenue_shift_ratio
+FROM first_touch ft
+FULL OUTER JOIN last_touch lt
+  ON ft.marketing_channel = lt.marketing_channel
+ORDER BY revenue_shift_ratio DESC;
