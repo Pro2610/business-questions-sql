@@ -1,0 +1,9 @@
+, last_touch AS (
+  SELECT
+    marketing_channel,
+    SUM(revenue_amount) AS attributed_revenue,
+    COUNT(DISTINCT user_id) AS users
+  FROM ordered_payments
+  WHERE rn_last = 1
+  GROUP BY 1
+)
