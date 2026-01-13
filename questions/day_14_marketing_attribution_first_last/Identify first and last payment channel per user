@@ -1,0 +1,16 @@
+WITH ordered_payments AS (
+  SELECT
+    user_id,
+    payment_date,
+    revenue_amount,
+    marketing_channel,
+    ROW_NUMBER() OVER (
+      PARTITION BY user_id
+      ORDER BY payment_date
+    ) AS rn_first,
+    ROW_NUMBER() OVER (
+      PARTITION BY user_id
+      ORDER BY payment_date DESC
+    ) AS rn_last
+  FROM `project.dataset.payments`
+)
