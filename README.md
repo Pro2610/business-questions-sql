@@ -1,17 +1,25 @@
 # Business Questions → SQL Answers
 
-This repository contains daily analytical case studies that translate real business questions into structured SQL analysis using **BigQuery**.
+A collection of **daily, business-driven SQL analyses** designed to demonstrate
+how real-world business questions can be translated into **structured analysis,
+clear metrics, and actionable insights**.
 
-Each case focuses on:
-- understanding the business problem,
-- selecting the right metrics,
-- writing clear and efficient SQL,
-- producing actionable business insights.
-
-The goal is to demonstrate **analytical thinking**, not just technical SQL skills.
+All analyses are implemented using **BigQuery SQL** and focus on
+**revenue, product, retention, and marketing analytics**.
 
 ---
 
+## 🎯 Project Goal
+
+This project simulates the **day-to-day work of a Data Analyst / Product Analyst**:
+- ambiguous business questions,
+- metric definition and decomposition,
+- cohort and lifecycle thinking,
+- decision-oriented insights.
+
+The emphasis is on **analytical thinking**, not just writing SQL queries.
+
+---
 
 ## 📂 Project Structure
 
@@ -21,82 +29,92 @@ questions/
 ├── day_03_lowest_retention_segment.md
 ├── day_04_funnel_bottleneck.md
 ├── day_05_new_vs_returning_users.md
+├── day_06_revenue_concentration_pareto.md
+├── day_07_churned_revenue.md
+├── day_08_arppu_drivers.md
+├── day_09_reactivated_users.md
+├── day_10_pricing_discount_impact.md
+├── day_11_cohort_revenue.md
+├── day_12_ltv_by_cohort.md
+├── day_13_stickiness_active_payers.md
+├── day_14_marketing_attribution_first_last.md
+├── day_15_executive_summary.md
 
-
-Each file represents **one complete business problem**.
-
----
-
-## ✅ Covered Business Questions (Days 1–5)
-
-### Day 01 — Revenue Drop Investigation
-**Question:** Why did revenue drop month-over-month?  
-**Focus:**
-- Revenue decomposition
-- Paid users vs ARPPU
-- Segment contribution analysis
+Each file represents **one complete analytical case**.
 
 ---
 
-### Day 02 — Best Marketing Campaign
-**Question:** Which campaign performs best considering both scale and quality?  
-**Focus:**
-- Revenue vs ARPPU trade-offs
-- Paid users
-- Balanced ranking logic
+## 📊 Covered Topics (Days 1–15)
+
+### Revenue & Monetization
+- Revenue decomposition and MoM drops
+- ARPPU drivers
+- Revenue concentration (Pareto / power users)
+- Pricing and discount impact
+
+### Retention & Lifecycle
+- D30 retention by segment
+- Funnel bottleneck analysis
+- Churned revenue (lost money, not just users)
+- Reactivated users and recovered revenue
+
+### Cohorts & Long-Term Value
+- Cohort revenue analysis
+- LTV by cohort
+- Early vs long-term cohort performance
+
+### Engagement & Stickiness
+- DAU / WAU / MAU proxy using active payers
+- Stickiness trends over time
+
+### Marketing Analytics
+- Best campaign / segment quality
+- First-touch vs last-touch attribution
 
 ---
 
-### Day 03 — Lowest Retention Segment
-**Question:** Which user segment has the lowest D30 retention?  
-**Focus:**
-- Retention logic
-- Early churn detection
-- Segment-level analysis
+## 🧠 Executive Summary
+
+For a management-ready overview of insights and recommendations, see:
+
+👉 **`questions/day_15_executive_summary.md`**
+
+This file summarizes:
+- key revenue drivers,
+- retention and churn risks,
+- pricing and marketing implications,
+- strategic recommendations.
 
 ---
 
-### Day 04 — Funnel Bottleneck Analysis
-**Question:** Where do users drop off the most in the conversion funnel?  
-**Focus:**
-- Funnel construction
-- Conversion rates
-- Drop-off analysis by segment
+## 🛠 Tools & Techniques
 
----
-
-### Day 05 — New vs Returning Users
-**Question:** Who drives revenue: new users or returning users?  
-**Focus:**
-- Revenue split by lifecycle stage
-- ARPPU comparison
-- Dependency on acquisition vs retention
-
----
-
-## 🛠 Tools & Technologies
 - SQL (BigQuery)
-- Analytical metrics: Revenue, ARPPU, Retention, Funnel Conversion
-- Window functions, CTEs, segmentation logic
+- CTEs and window functions
+- Cohort analysis
+- Funnel analysis
+- Revenue and lifecycle metrics
+- Attribution logic
 
 ---
 
-## 🎯 Why This Project
-This repository simulates the **day-to-day work of a Data Analyst**, including:
-- ambiguous business questions,
-- metric definition,
-- trade-off analysis,
-- decision-oriented insights.
+## 🚀 Why This Project
 
-Each case is intentionally concise and focused, similar to real analytical requests from stakeholders.
+This repository demonstrates:
+- how analysts think beyond dashboards,
+- how SQL supports business decisions,
+- how to communicate insights clearly to stakeholders.
+
+The format is intentionally **concise, iterative, and realistic** —
+similar to internal analytics requests in real companies.
 
 ---
 
-## 🚀 Next Steps
-- Continue adding **one business question per day**
-- Expand into:
-  - revenue concentration (Pareto),
-  - churned revenue,
+## 🔜 Next Steps (Optional)
+- Convert selected cases into **Tableau / Power BI dashboards**
+- Extend cohort analysis with **CAC vs LTV**
+- Add attribution variants (time-decay, linear)
+- Continue daily analytical cases
   - cohort analysis,
   - pricing sensitivity,
   - marketing attribution.
