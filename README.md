@@ -25,7 +25,9 @@ The emphasis is on **analytical thinking**, not just writing SQL queries.
 
 questions/
 ├── day_01_revenue_drop.md
+
 ├── day_02_best_campaign.md
+
 ├── day_03_lowest_retention_segment.md
 ├── day_04_funnel_bottleneck.md
 ├── day_05_new_vs_returning_users.md
