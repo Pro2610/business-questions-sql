@@ -36,15 +36,25 @@ questions/
 ├── day_05_new_vs_returning_users.md
 
 ├── day_06_revenue_concentration_pareto.md
+
 ├── day_07_churned_revenue.md
+
 ├── day_08_arppu_drivers.md
+
 ├── day_09_reactivated_users.md
+
 ├── day_10_pricing_discount_impact.md
+
 ├── day_11_cohort_revenue.md
+
 ├── day_12_ltv_by_cohort.md
+
 ├── day_13_stickiness_active_payers.md
+
 ├── day_14_marketing_attribution_first_last.md
+
 ├── day_15_executive_summary.md
+
 
 Each file represents **one complete analytical case**.
 
