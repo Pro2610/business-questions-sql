@@ -4,6 +4,7 @@ A collection of **daily, business-driven SQL analyses** designed to demonstrate
 how real-world business questions can be translated into **structured analysis,
 clear metrics, and actionable insights**.
 
+
 All analyses are implemented using **BigQuery SQL** and focus on
 **revenue, product, retention, and marketing analytics**.
 
