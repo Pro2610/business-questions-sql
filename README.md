@@ -63,6 +63,7 @@ Each file represents **one complete analytical case**.
 
 ## 📊 Covered Topics (Days 1–15)
 
+
 ### Revenue & Monetization
 - Revenue decomposition and MoM drops
 - ARPPU drivers
