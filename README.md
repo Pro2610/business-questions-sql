@@ -93,6 +93,7 @@ Each file represents **one complete analytical case**.
 
 ## 🧠 Executive Summary
 
+
 For a management-ready overview of insights and recommendations, see:
 
 👉 **`questions/day_15_executive_summary.md`**
