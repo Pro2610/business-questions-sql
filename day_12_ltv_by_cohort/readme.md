@@ -1,6 +1,7 @@
 # Day 12 — LTV by Cohort Analysis
 
 ## ❓ Business Question
+
 How does Lifetime Value (LTV) evolve across cohorts over time?
 
 ## 🧩 Business Context
