@@ -18,4 +18,5 @@ This analysis builds directly on the cohort revenue logic.
 - **Cohort age**: months since first payment.
 - **LTV**: cumulative revenue per user in a cohort.
 
+
 LTV = Cumulative Revenue / Number of Users in Cohort
