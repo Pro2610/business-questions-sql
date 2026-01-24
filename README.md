@@ -1,5 +1,6 @@
 # Business Questions → SQL Answers
 
+
 A collection of **daily, business-driven SQL analyses** designed to demonstrate
 how real-world business questions can be translated into **structured analysis,
 clear metrics, and actionable insights**.
