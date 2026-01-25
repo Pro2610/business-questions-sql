@@ -18,6 +18,7 @@ This project simulates the **day-to-day work of a Data Analyst / Product Analyst
 - metric definition and decomposition,
 - cohort and lifecycle thinking,
 - decision-oriented insights.
+  
 
 The emphasis is on **analytical thinking**, not just writing SQL queries.
 
