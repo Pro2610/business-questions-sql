@@ -13,6 +13,7 @@ All analyses are implemented using **BigQuery SQL** and focus on
 
 ## 🎯 Project Goal
 
+
 This project simulates the **day-to-day work of a Data Analyst / Product Analyst**:
 - ambiguous business questions,
 - metric definition and decomposition,
