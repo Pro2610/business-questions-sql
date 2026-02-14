@@ -23,6 +23,7 @@ This project simulates the **day-to-day work of a Data Analyst / Product Analyst
 
 The emphasis is on **analytical thinking**, not just writing SQL queries.
 
+
 ---
 
 ## 📂 Project Structure
