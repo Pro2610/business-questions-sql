@@ -13,6 +13,7 @@ All analyses are implemented using **BigQuery SQL** and focus on
 
 ---
 
+
 ## 🎯 Project Goal
 
 
