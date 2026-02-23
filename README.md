@@ -30,6 +30,7 @@ The emphasis is on **analytical thinking**, not just writing SQL queries.
 
 ---
 
+
 ## 📂 Project Structure
 
 questions/
